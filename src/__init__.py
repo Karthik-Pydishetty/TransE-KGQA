@@ -1,1 +1,0 @@
-# TransE Knowledge Graph Embeddings Package 
