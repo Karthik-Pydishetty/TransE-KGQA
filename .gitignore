@@ -173,6 +173,3 @@ Thumbs.db
 experiments/results/
 temp/
 tmp/ 
-
-# Dataset repositories (external clones)
-data/LC-QuAD/ 
