@@ -1,0 +1,52 @@
+# TransE Model Configuration
+
+# Model parameters
+model:
+  embedding_dim: 100
+  margin: 1.0
+  norm: 1  # 1 for L1 norm, 2 for L2 norm
+  
+# Training parameters
+training:
+  batch_size: 128
+  learning_rate: 0.01
+  num_epochs: 100
+  negative_sampling_rate: 10  # Number of negative samples per positive sample
+  device: "cuda"  # "cuda" if available, "cpu" otherwise
+  
+# Data parameters
+data:
+  dataset_name: "LC-QuAD"
+  train_split: 0.8
+  validation_split: 0.1
+  test_split: 0.1
+  max_triples: null  # Set to null for no limit, or integer for max number of triples
+  
+# Evaluation parameters
+evaluation:
+  metrics: ["MRR", "Hits@1", "Hits@3", "Hits@10"]
+  eval_frequency: 10  # Evaluate every N epochs
+  
+# Optimization parameters
+optimizer:
+  type: "Adam"  # "Adam", "SGD", "Adagrad"
+  weight_decay: 0.0001
+  
+# Early stopping
+early_stopping:
+  patience: 10
+  min_delta: 0.001
+  
+# Logging and checkpointing
+logging:
+  log_frequency: 100  # Log every N batches
+  save_frequency: 10  # Save checkpoint every N epochs
+  experiment_name: "transe_baseline"
+  use_wandb: false  # Set to true to use Weights & Biases
+  
+# Paths
+paths:
+  data_dir: "data/"
+  model_dir: "models/"
+  log_dir: "logs/"
+  checkpoint_dir: "checkpoints/" 
