@@ -141,9 +141,8 @@ data/processed/
 data/external/
 *.csv
 *.tsv
-*.json
 *.jsonl
-*.txt
+
 *.gz
 *.zip
 *.tar.gz
@@ -174,3 +173,6 @@ Thumbs.db
 experiments/results/
 temp/
 tmp/ 
+
+# Dataset repositories (external clones)
+data/LC-QuAD/ 
