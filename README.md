@@ -1,142 +1,116 @@
-# TransE-KGQA: Knowledge Graph Question Answering with TransE
+# TransE Knowledge Graph Question Answering (KGQA)
 
-A collaborative project extending the [TransE-PyTorch implementation](https://github.com/mklimasz/TransE-PyTorch) for knowledge graph question answering using the LC-QuAD dataset.
+A comprehensive implementation of the TransE model for Knowledge Graph Question Answering, integrated with the LC-QuAD dataset for compliance research applications.
 
-## Overview
+## 🚀 Quick Start for Collaborators
 
-This project combines:
-- **TransE-PyTorch**: Original implementation of TransE (Translating Embeddings) for knowledge graph embeddings
-- **LC-QuAD**: A gold standard dataset for question answering over knowledge graphs
-- **KGQA Extension**: Our collaborative extension for knowledge graph question answering tasks
-
-## Original TransE Implementation
-
-This project is based on the TransE-PyTorch implementation by [mklimasz](https://github.com/mklimasz/TransE-PyTorch), which provides:
-- PyTorch implementation of TransE model from Bordes et al. (2013)
-- Training and evaluation on knowledge graph datasets
-- Synthetic data for testing and development
-
-## Project Structure
-
-```
-├── main.py                    # Main training script (from original repo)
-├── model.py                   # TransE model implementation
-├── data.py                    # Data loading utilities
-├── metric.py                  # Evaluation metrics
-├── storage.py                 # Model storage utilities
-├── synth_data/                # Synthetic data for testing
-├── data/                      # LC-QuAD and other datasets (to be added)
-├── docs/                      # Documentation
-├── requirements.txt           # Python dependencies
-└── .gitignore                 # Git ignore patterns
-```
-
-## Setup Instructions
-
-### Prerequisites
-- Python 3.8+
-- PyTorch
-- CUDA (optional, for GPU training)
-
-### Installation
-
-1. Clone this repository:
+### 1. Clone the Repository (Including Dataset)
 ```bash
+# Option 1: Clone with dataset in one command (Recommended)
+git clone --recurse-submodules https://github.com/Karthik-Pydishetty/TransE-KGQA.git
+cd TransE-KGQA
+
+# Option 2: Clone first, then get dataset
 git clone https://github.com/Karthik-Pydishetty/TransE-KGQA.git
 cd TransE-KGQA
+git submodule update --init --recursive
 ```
 
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
+### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-### Quick Test with Synthetic Data
+### 3. Verify Dataset Access
 ```bash
-python main.py --nouse_gpu
+# Check dataset is available
+ls data/LC-QuAD/
+# Should show: train-data.json, test-data.json, resources/, etc.
 ```
 
-### Training on Custom Dataset
+### 4. Run the Model
 ```bash
-python main.py --nouse_gpu --dataset_path=<path_to_your_dataset>
+python main.py
 ```
 
-### Command Line Options
+## 📊 Dataset Information
+
+This project includes the **LC-QuAD dataset** as a Git submodule:
+- **Location**: `data/LC-QuAD/`
+- **Size**: 5,000 question-SPARQL query pairs
+- **Format**: JSON files with natural language questions and corresponding SPARQL queries
+- **Source**: [AskNowQA/LC-QuAD](https://github.com/AskNowQA/LC-QuAD)
+
+## 🔧 Development Workflow
+
+### Working with the Dataset
+The LC-QuAD dataset is included as a Git submodule. This means:
+- ✅ Everyone gets the same dataset version
+- ✅ Dataset updates are tracked and versioned
+- ✅ No need to manually download large files
+
+### Updating the Dataset (Advanced)
+If you need to update to a newer version of LC-QuAD:
 ```bash
-python main.py --help
+cd data/LC-QuAD
+git pull origin main
+cd ../..
+git add data/LC-QuAD
+git commit -m "Update LC-QuAD dataset"
+git push origin main
 ```
 
-### Unit Tests
-```bash
-python -m unittest discover -p "*_test.py"
+## 📁 Project Structure
+
+```
+TransE-KGQA/
+├── data/
+│   └── LC-QuAD/              # LC-QuAD dataset (submodule)
+│       ├── train-data.json   # Training data (5000 examples)
+│       ├── test-data.json    # Test data
+│       └── resources/        # Entities, predicates, templates
+├── synth_data/               # Synthetic training data
+├── runs/                     # Training logs and outputs
+├── main.py                   # Main training script
+├── model.py                  # TransE model implementation
+├── data.py                   # Data loading and preprocessing
+├── metric.py                 # Evaluation metrics
+├── storage.py                # Model persistence utilities
+├── checkpoint.tar            # Pre-trained model weights
+└── requirements.txt          # Python dependencies
 ```
 
-## LC-QuAD Integration (Planned)
+## 🎯 Research Focus
 
-We will extend this implementation to work with the [LC-QuAD dataset](https://github.com/AskNowQA/LC-QuAD/tree/data) for:
-- Question answering over knowledge graphs
-- Evaluation on KGQA tasks
-- Integration with SPARQL query generation
+This implementation focuses on:
+- **Knowledge Graph Embeddings**: TransE model for entity and relation representation
+- **Question Answering**: Natural language to SPARQL query translation
+- **Compliance Research**: Applications in regulatory and compliance domains
+- **Collaborative Development**: Easy setup for team-based research
 
-## Contributing
+## 📚 Key Features
 
-We welcome contributions from all team members! Please follow these guidelines:
+- ✅ Complete TransE implementation with training and evaluation
+- ✅ LC-QuAD dataset integration for realistic QA scenarios  
+- ✅ Pre-trained model checkpoints for quick experimentation
+- ✅ Comprehensive evaluation metrics
+- ✅ Easy collaborative setup with Git submodules
 
-1. **Branching Strategy**: 
-   - `main`: Stable, production-ready code
-   - `develop`: Integration branch for features
-   - `feature/your-feature-name`: Individual feature branches
+## 🤝 Contributing
 
-2. **Before Starting Work**:
-   - Pull latest changes: `git pull origin main`
-   - Create a new branch: `git checkout -b feature/your-feature-name`
+1. Clone the repository with submodules (see Quick Start)
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes and test thoroughly
+4. Commit your changes: `git commit -m "Description"`
+5. Push to your branch: `git push origin feature-name`
+6. Create a Pull Request
 
-3. **Code Standards**:
-   - Follow PEP 8 for Python code
-   - Add docstrings to all functions and classes
-   - Write unit tests for new features
-   - Run tests before committing: `python -m unittest discover -p "*_test.py"`
+## 📄 License
 
-4. **Committing Changes**:
-   - Use descriptive commit messages
-   - Reference issues when applicable: `fixes #123`
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-5. **Pull Requests**:
-   - Create PR from your feature branch to `develop`
-   - Add description of changes
-   - Request review from team members
+The LC-QuAD dataset included as a submodule has its own licensing terms - see `data/LC-QuAD/LICENSE.txt`.
 
-## Team Members
+---
 
-- [Add team member names and roles here]
-
-## Original Results (TransE-PyTorch)
-
-### FB15k Dataset
-
-| Source/Metric  | Hits@1 (raw) | Hits@3 (raw) | Hits@10 (raw) | MRR (raw) |
-| ---------------| ------------ | ------------ | ------------- | --------- |
-| Paper [[1]](#references) | X | X | 34.9 | X |
-| TransE-PyTorch | 11.1 | 25.33 | **46.53** | 22.29 |
-
-## References
-
-- **Original Implementation**: [TransE-PyTorch](https://github.com/mklimasz/TransE-PyTorch)
-- **LC-QuAD Dataset**: [LC-QuAD](https://github.com/AskNowQA/LC-QuAD/tree/data)
-- **TransE Paper**: [Bordes et al., "Translating embeddings for modeling multi-relational data," NIPS 2013](http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf)
-
-## License
-
-Based on the original TransE-PyTorch implementation. [Choose appropriate license]
-
-## Issues and Support
-
-Please use GitHub Issues for bug reports, feature requests, and questions. 
+**Note**: This repository uses Git submodules for dataset management. Always use `--recurse-submodules` when cloning to ensure you get the complete project including the dataset. 
