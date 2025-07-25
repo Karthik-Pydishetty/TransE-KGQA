@@ -113,4 +113,44 @@ The LC-QuAD dataset included as a submodule has its own licensing terms - see `d
 
 ---
 
-**Note**: This repository uses Git submodules for dataset management. Always use `--recurse-submodules` when cloning to ensure you get the complete project including the dataset. 
+**Note**: This repository uses Git submodules for dataset management. Always use `--recurse-submodules` when cloning to ensure you get the complete project including the dataset.
+
+## 🔧 Troubleshooting
+
+### Problem: Empty `data/LC-QuAD/` folder after pulling
+If you pulled changes but the `data/LC-QuAD/` folder is empty, run:
+
+```bash
+# Initialize and update all submodules
+git submodule update --init --recursive
+
+# Or alternatively, update to latest remote version
+git submodule update --remote
+```
+
+### Problem: Submodule not updating to latest version
+To pull the latest changes for all submodules:
+
+```bash
+# Update all submodules to latest commit on their remote branches
+git submodule update --remote
+
+# Then commit the updated submodule references
+git add .
+git commit -m "Update submodules to latest version"
+git push origin your-branch
+```
+
+### Daily Workflow for Team Members
+When pulling changes from main:
+
+```bash
+# 1. Pull latest changes
+git pull origin main
+
+# 2. Update submodules (IMPORTANT!)
+git submodule update --init --recursive
+
+# 3. Verify dataset is available
+ls data/LC-QuAD/  # Should show train-data.json, test-data.json, etc.
+``` 
