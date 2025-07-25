@@ -128,6 +128,86 @@ git submodule update --init --recursive
 git submodule update --remote
 ```
 
+### 🚨 COMPREHENSIVE DEBUGGING FOR ARJUN (Step-by-Step)
+
+If the above doesn't work, follow these detailed steps:
+
+#### Step 1: Check Current Status
+```bash
+# Check what branch you're on
+git branch
+
+# Check if you're in the right directory
+pwd
+# Should show: .../TransE-KGQA (or your repo name)
+
+# Check submodule status
+git submodule status
+```
+
+#### Step 2: Verify Submodule Configuration
+```bash
+# Check if .gitmodules exists
+cat .gitmodules
+# Should show:
+# [submodule "data/LC-QuAD"]
+#     path = data/LC-QuAD
+#     url = https://github.com/AskNowQA/LC-QuAD.git
+```
+
+#### Step 3: Force Submodule Initialization (Try These in Order)
+
+**Option A: Clean slate approach**
+```bash
+# Remove existing (empty) submodule directory
+rm -rf data/LC-QuAD
+
+# Re-initialize submodule
+git submodule update --init --recursive
+```
+
+**Option B: If Option A doesn't work**
+```bash
+# Deinitialize submodule completely
+git submodule deinit data/LC-QuAD
+
+# Re-add and initialize
+git submodule update --init data/LC-QuAD
+```
+
+**Option C: Manual clone (last resort)**
+```bash
+# Remove empty directory
+rm -rf data/LC-QuAD
+
+# Manually clone the dataset
+git clone https://github.com/AskNowQA/LC-QuAD.git data/LC-QuAD
+
+# Re-initialize submodule tracking
+git submodule update --init
+```
+
+#### Step 4: Verify Success
+```bash
+# Check if files are now present
+ls data/LC-QuAD/
+# Should show: train-data.json, test-data.json, resources/, README.md, LICENSE.txt
+
+# Check file sizes to confirm they're not empty
+du -sh data/LC-QuAD/
+# Should show: ~97M data/LC-QuAD/
+```
+
+#### Step 5: If STILL not working - Network/Permission Issues
+```bash
+# Test if you can access the repository
+curl -I https://github.com/AskNowQA/LC-QuAD.git
+
+# Try with SSH instead of HTTPS (if you have SSH key set up)
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+git submodule update --init --recursive
+```
+
 ### Problem: Submodule not updating to latest version
 To pull the latest changes for all submodules:
 
