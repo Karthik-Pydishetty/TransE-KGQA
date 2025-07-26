@@ -1,0 +1,29 @@
+{
+  "query_statistics": {
+    "total": 5000,
+    "successful": 2567,
+    "failed": 368,
+    "empty_results": 2065,
+    "ssl_errors": 0,
+    "timeout_errors": 0,
+    "retries_used": 9
+  },
+  "total_unique_triples": 57928,
+  "failed_queries_count": 0,
+  "processing_details": {
+    "mode": "default",
+    "endpoints_used": [
+      "https://dbpedia.org/sparql",
+      "http://dbpedia.org/sparql",
+      "https://linked.opendata.cz/sparql"
+    ],
+    "final_endpoint": "https://dbpedia.org/sparql",
+    "config": {
+      "request_delay": 0.3,
+      "batch_size": 20,
+      "max_retries": 3,
+      "timeout": 30,
+      "ssl_verify": false
+    }
+  }
+}

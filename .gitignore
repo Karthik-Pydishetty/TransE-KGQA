@@ -137,7 +137,6 @@ logs/
 
 # Data files
 data/raw/
-data/processed/
 data/external/
 *.csv
 *.tsv

@@ -1,0 +1,2 @@
+Jordan_River	22-rdf-syntax-ns#type	dbpedia
+Jordan_River	riverMouth	dbpedia
